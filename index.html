@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Train Your Pokemon!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"
+            integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
+            crossorigin="anonymous">
+    </script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div>
+    <header>
+      <h1>
+        PokePet Trainer
+      </h1>
+    </header>
+
+    <main>
+      <!-- Pet Image Container -->
+      <section class="pet-image-container">
+
+        <!-- Background Image -->
+        <div style="background-image: url('./images/background.jpg')">
+          <!-- Pet Image -->
+          <img class="pet-image" src="./images/TurtwigWalk.png">
+        </div>
+      </section>
+
+      <!-- Popup -->
+      <div id="popupOverlay" class="overlay">
+        <div class="popup-box">
+          <h2>Enter Name</h2>
+          <div id="nameError" class="error"></div>
+          <input type="text" id="myInput" placeholder="Name your Pokemon">
+          <div class="buttons">
+            <button onclick="submitInput()">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Popup -->
+      <div id="instructionOverlay" class="overlay">
+        <div class="instruction-box">
+          <div class="main-controls">
+            <h2>Instructions</h2>
+              Press 'ESC' to Return
+              <ol>
+                <li>Click Pokeball to Capture</li>
+                <li>Name Pet</li>
+                <li>Interact with Pokemon to Evolve</li>
+              </ol>
+              1st Evolution:
+              <ul>
+                <li> Weight > 10 pounds</li>
+                <li> Happiness > 50 tail wags</li>
+                <li> IQ > 50</li>
+              </ul>
+              </br>
+              2nd Evolution:
+              <ul>
+                <li> Weight > 30 pounds</li>
+                <li> Happiness > 70 tail wags</li>
+                <li> IQ > 70</li>
+              </ul>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Controls -->
+      <div class="main-controls">
+        <section class="dashboard hidden" style="padding: 50px">
+          <div style="font-size: 50px;">Pet Info</div>
+          <div>Name: <strong><span class="name"></span></strong></div>
+          <div>Weight: <strong><span class="weight"></span> pounds</strong></div>
+          <div>Happiness: <strong><span class="happiness"></span> tail wags (per min)</strong></div>
+          <div>IQ: <strong><span class="iq"></span></strong></div>
+          <div>Mood: <strong><span class="mood"></span></strong></div>
+        </section>
+        <div class="button-container hidden">
+          <!-- Treat Button -->
+          <button class="treat-button">
+            Treat
+          </button>
+
+          <!-- Play Button -->
+          <button class="play-button">
+            Play
+          </button>
+
+          <!-- Exercise Button -->
+          <button class="exercise-button">
+            Exercise
+          </button>
+
+          <!-- Study Button -->
+          <button class="study-button">
+            Study
+          </button>
+
+          <!-- Doom Scroll Button -->
+          <button class="doom-scroll-button">
+            Doom Scroll
+          </button>
+
+        </div>
+
+        <!--Pokeball -->
+        <button id="pokeball" onclick="throwPokeball()"></button>
+
+        <!-- Switch Pokemon Button -->
+        <button onclick="switchPokemon()">Switch Pokemon</button>
+
+        <!-- Status Log -->
+        <div class="status-container">
+          <h3>Activity Log</h3>
+          <div id="status-log"></div>
+        </div>
+      </div>
+      <div class="main-controls">
+        <button id="instrucButton"class="instructions-button" onclick="toggleInstructionsPopup()">
+          Instructions
+        </button>
+      </div>
+    </main>
+    
+
+    <audio id="turtwigSound" src="./sounds/turtwigSound.mp3"></audio>
+    <audio id="grovyleSound" src="./sounds/grovyleSound.mp3"></audio>
+    <audio id="torterraSound" src="./sounds/torterraSound.mp3"></audio>
+    <audio id="charmanderSound" src="./sounds/charmander.mp3"></audio>
+    <audio id="charmeleonSound" src="./sounds/charmeleon.mp3"></audio>
+    <audio id="charizardSound" src="./sounds/charizard.mp3"></audio>
+    <audio id="pokeballSound" src="./sounds/PokéballShake.mp3"></audio>
+    <audio id="bgMusic" src="./sounds/DriftveilCityMusic.mp3" loop></audio>
+  </body>
+</html>

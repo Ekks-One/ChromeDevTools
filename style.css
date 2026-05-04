@@ -1,0 +1,297 @@
+
+* {
+    box-sizing: border-box;
+  }
+
+  @font-face {
+    font-family: 'PokemonHollow';
+    src: url('./fonts/Pokemon\ Hollow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'PokemonSolid';
+    src: url('./fonts/Pokemon\ Solid.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: helvetica, arial, sans-serif;
+    margin: 25px;
+    background-image: url(./images/siteBackground.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+  
+
+  h1 {
+    font-weight: bold;
+    background-color: black;
+    color: white;
+    font-family: 'PokemonSolid', cursive;
+    font-size: 2em;
+    text-align: center;
+    margin: 0 auto 20px auto;
+    padding: 10px 40px;
+    width: 50%;
+    border: 4px solid #000000;
+    border-radius: 50px; 
+    margin-bottom: 20px;
+  }
+
+  h2 {
+    font-weight: bold;
+    color: #000;
+    font-family: 'PokemonSolid', cursive;
+    font-size: 3em;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 20px;
+  }
+  
+  main {
+    display:block;
+    height:175px;
+  }
+  
+  header {
+    border-bottom: 1px solid black;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  p {
+    max-width: 600px;
+  }
+  
+  
+  li {
+    margin-bottom: 25px;
+  }
+  
+  footer {
+    padding-top: 25px;
+    border-top: 1px solid black;
+  }
+  
+  footer a {
+    float:left;
+    margin:5px;
+  }
+  
+  .pet-image {
+    height: 250px;
+    /* Required for top/left movement */
+    position: absolute;
+    /* Makes the movement smooth */
+    transition: all 1s ease-in-out;
+  }
+  
+  .dashboard div {
+    display:block;
+  }
+  
+  .pet-image-container {
+    /* Acts as the boundary for the pet */
+    position: relative;
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+
+    background-image: url('./images/background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-color: black;
+    border-width: 6px;
+    border-style: solid;
+  }
+
+  .main-controls {
+    background-color: whitesmoke;
+    border: 4px solid #000000;
+    border-radius: 50px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    width: fit-content;
+    margin: 30px auto;
+    padding: 20px 50px;
+  }
+  
+  .dashboard {
+    float:none;
+    padding:0;
+    margin: 10px;
+    background: white;
+    border-radius: 15px;
+    padding: 10px 20px; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .button-container {
+    margin-top:20px;
+  }
+
+  /* Utility class to hide elements when needed */
+  .hidden {
+    display: none !important;
+  }
+
+  .button-container button {
+    width: 120px;
+    padding: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: white;
+    background-color: #30b424;
+    border: 4px solid #18800f;
+    border-radius: 50px; 
+    box-shadow: inset -4px -4px 0px 0px #0d5007;
+    transition: all 0.1s active;
+  }
+
+  #pokeball {
+    width: 150px;
+    height: 150px;
+    background: url('./images/pokeball.png') center center / contain no-repeat;
+    cursor: pointer;
+    border-color: transparent;
+  }
+
+  /* Pokéball shake animation */
+  .shake {
+     /* Shakes 3 times like the game */
+    animation: wobble 1.5s ease 3;
+  }
+
+  /* Keyframes for the wobble animation */
+  @keyframes wobble {
+    25% { transform: rotate(15deg); }
+    50% { transform: rotate(-15deg); }
+    75% { transform: rotate(5deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  /* Grayscale effect for after the catch */
+  .caught {
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 1s ease;
+  }
+
+  /* Hide the Turtwig when caught */
+  .caught-pet {
+    transform: scale(0);
+    opacity: 0;
+    transition: all 0.5s ease-in;
+  }
+
+
+  #instrucButton {
+    width: 200px;
+    height: 30px;
+    /* border: transparent; */
+    background-color: whitesmoke;
+    
+  }
+
+  .dashboard-controls {
+    display: flex;
+    align-items: flex-start; 
+    gap: 30px;      
+    margin-top: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    /* Stacks buttons vertically */
+    flex-direction: column;
+    gap: 10px;
+    width: 120px; 
+  }
+
+  .status-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 400px;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    /* Scroll if the log gets too long */
+    overflow-y: auto;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+  }
+
+  /* Class to dim the log when the pet is caught */
+  .log-dimmed {
+    opacity: 0.3 !important; 
+    filter: blur(1px);
+    /* Prevents interaction while dimmed */
+    pointer-events: none;
+  }
+
+  #status-log p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    border-bottom: 1px ridge #eee;
+  }
+
+  .overlay {
+    /* Hidden initially */
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    /* Ensures it appears above all other content */
+    z-index: 9999;
+  }
+
+  .popup-box {
+    background-image: url(./images/nameBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    /* Adds depth */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 10000;
+  }
+
+   .instruction-box {
+    background-image: url(./images/nameBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    /* Adds depth */
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    z-index: 10000;
+  }
+
+  /* Class to show the popup */
+  .show { display: flex; }
+
+  #nameError {
+    color: red;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+  }
+
