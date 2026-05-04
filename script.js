@@ -82,22 +82,6 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       return "is just vibing.";
     }
 
-
-    function showPartyTable() {
-      console.table(
-        pokemonList.map((pokemon, index) => ({
-          Slot: index + 1,
-          Species: pokemon.stages[pokemon.stage - 1].name,
-          Name: pokemon.name,
-          Caught: pokemon.caught,
-          Weight: pokemon.weight,
-          Happiness: pokemon.happiness,
-          IQ: pokemon.iq,
-          Stage: pokemon.stage,
-        }))
-      );
-    }
-
     function switchPokemon() {
       if (animation) return;
       animation = true;
@@ -130,6 +114,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         }
 
         updatePetInfoInHtml();
+        //Show current party
         showPartyTable();
         if(pet_info.caught) {
           addStatusUpdate(`Go! ${pet_info.name}!`);
@@ -198,6 +183,8 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       //Create error message if the input is empty and prevent submission
       if(val.trim() === "") {
         document.getElementById('nameError').textContent = "Please enter a name for your pet.";
+        //Log error message to console when empty input is submitted
+        console.log("Enter a name thats not empty");
         return;
       }
 
@@ -281,7 +268,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
         if(ball.hasClass('caught')) {
           addStatusUpdate(`<b>Come back! ${pet_info.name}!`);
         } else {
-          if(pet_info.name === "My Pet Name") {
+          if(!pet_info.caught) {
             addStatusUpdate(`<b>Go! ${pet_info.speciesName}!`);
           } else {
             addStatusUpdate(`<b>Go! ${pet_info.name}!`);
@@ -391,7 +378,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       checkWeightAndHappinessBeforeUpdating();
       checkEvolution();
       updatePetInfoInHtml();
-      if(pet_info.name === "My Pet Name") {
+      if(!pet_info.caught) {
         addStatusUpdate(`Catch the wild Pokemon`);
       }
     }
@@ -419,4 +406,73 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       $('.iq').text(pet_info.iq);
       $('.mood').text(getMoodComment());
     }
-  
+
+    //Log Info
+    function logInfo() {
+      console.log(`Name: ${pet_info.name}`);
+      console.log(`Weight: ${pet_info.weight}`);
+      console.log(`Happiness: ${pet_info.happiness}`);
+      console.log(`IQ: ${pet_info.iq}`);
+    }
+    
+    //Log Table
+    function showPartyTable() {
+      console.table(
+        pokemonList
+        //Filters pokemonList to show only caught pokemon
+          .filter(pokemon => pokemon.caught)
+          //Maps caught pokemon to a spot in the table with pet info
+          .map((pokemon, index) => ({
+            Slot: index + 1,
+            Species: pokemon.stages[pokemon.stage - 1].name,
+            Name: pokemon.name,
+            Weight: pokemon.weight,
+            Happiness: pokemon.happiness,
+            IQ: pokemon.iq,
+            Stage: pokemon.stage,
+          }))
+      );
+    }
+
+    //Log Group
+    function currentParty() {
+      //Grouping console logs together to show current party of pokemon with their names. If no pokemon caught, show error message in console instead.
+      console.group("Current Party");
+      if(pokemonList.filter(pokemon => pokemon.caught).length === 0) {
+        console.error("No Pokemon caught yet!");
+      } else {
+        pokemonList.forEach((pokemon, index) => {
+          console.log(`${pokemon.name}`);
+        });
+      }
+      console.groupEnd();
+    }
+
+    //Custom Log
+    function logCustom() {
+      console.log(
+        '%c🔥 Pokemon Ready!',
+        "font-family: 'PokemonHollow'; font-size: 20px; color: white; background: darkblue; padding: 6px;"
+      );
+    }
+
+    //404 Error Log
+    function logError() {
+      fetch('/pokemon-data');
+    }
+
+    //Cause Error
+    function causeError() {
+      document.querySelector('#pokemonMaster').textContent = "Congratulations, you are now a Pokemon Master!";
+    }
+
+    //Violation Error
+    function violationError() {
+      const duration = 3000;
+      const start = new Date().getTime();
+      while (new Date().getTime() < start + duration) {
+        // Block the main thread for 3 seconds.
+      }
+    }
+
+    

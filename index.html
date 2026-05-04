@@ -116,9 +116,19 @@
         <button id="pokeball" onclick="throwPokeball()"></button>
 
         <!-- Switch Pokemon Button -->
-        <button onclick="switchPokemon()">Switch Pokemon</button>
+        <div class="buttons">
+          <h3>Buttons</h1>
+          <ul>
+            <li><button onclick="showPartyTable()">Party Table</button></li>
+            <li><button onclick="logInfo()">Log Info</button></li>
+            <li><button onclick="currentParty()">Current Party</button></li>
+            <li><button onclick="logTable()">Log Table</button></li>
+            <li><button onclick="logCustom()">Log Custom</button></li>
+          </ul>
+        </div>
 
         <!-- Status Log -->
+        <button onclick="switchPokemon()">Switch Pokemon</button>
         <div class="status-container">
           <h3>Activity Log</h3>
           <div id="status-log"></div>
