@@ -409,15 +409,25 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
 
     //Log Info
     function logInfo() {
-      console.log(`Name: ${pet_info.name}`);
-      console.log(`Weight: ${pet_info.weight}`);
-      console.log(`Happiness: ${pet_info.happiness}`);
-      console.log(`IQ: ${pet_info.iq}`);
+      if(pokemonList[currentPokemonIndex].caught === false) {
+        console.warn("You haven't caught this Pokemon yet! Catch it to see more info.");
+      }
+      else {
+        console.log(`Name: ${pet_info.name}`);
+        console.log(`Weight: ${pet_info.weight}`);
+        console.log(`Happiness: ${pet_info.happiness}`);
+        console.log(`IQ: ${pet_info.iq}`);
+      }
     }
     
     //Log Table
     function showPartyTable() {
-      console.table(
+      if(pokemonList.filter(pokemon => pokemon.caught).length === 0) {
+        console.warn("No Pokemon caught yet!");
+        return;
+      }
+      else {
+        console.table(
         pokemonList
         //Filters pokemonList to show only caught pokemon
           .filter(pokemon => pokemon.caught)
@@ -432,6 +442,7 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
             Stage: pokemon.stage,
           }))
       );
+      }
     }
 
     //Log Group
@@ -439,11 +450,13 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       //Grouping console logs together to show current party of pokemon with their names. If no pokemon caught, show error message in console instead.
       console.group("Current Party");
       if(pokemonList.filter(pokemon => pokemon.caught).length === 0) {
-        console.error("No Pokemon caught yet!");
+        console.error("Current Party is empty!");
       } else {
-        pokemonList.forEach((pokemon, index) => {
-          console.log(`${pokemon.name}`);
-        });
+        for(let i = 0; i < pokemonList.length; i++) {
+          if(pokemonList[i].caught) {
+            console.log(`${pokemonList[i].name}`);
+          }
+        }
       }
       console.groupEnd();
     }
@@ -457,13 +470,14 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
     }
 
     //404 Error Log
-    function logError() {
+    function Error404() {
       fetch('/pokemon-data');
     }
 
-    //Cause Error
-    function causeError() {
-      document.querySelector('#pokemonMaster').textContent = "Congratulations, you are now a Pokemon Master!";
+    //Type Error
+    function typeError() {
+      const arr = [1, 2, 3];
+      console.log(arr[5].toString());
     }
 
     //Violation Error
