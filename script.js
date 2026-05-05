@@ -489,4 +489,20 @@ $(function() { // Makes sure that your function is called once all the DOM eleme
       }
     }
 
+    //Reproduce a Bug
+    function bugTest() {
+      const pokemon = {
+        name: "Pikachu",
+        level: 25,
+      };
+
+      console.log("Before crash");
+
+      console.log(pokemonName);
+
+      console.log("After crash");
+
+      console.log(pokemon.name);
+    }
+
     
